@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Talk</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- 002 - include face-api.min.js -->
+  <script defer src="js/face-api.min.js"></script>
+  <!-- 003 - include our script -->
+  <script defer src="js/main.js"></script>
+  <script src="js/webrtc.js"></script>
+</head>
+<body>
+  <div class="content">
+    <!-- 004 - define a tag for video -->
+    <video id="cam" width="256" height="128" autoplay muted></video>
+    <!-- 005 - define a div where to place the emoji -->
+    <div id="face">  </div>
+  </div>
+  <div class="container" id="StartButton">
+    <button class="btn" id="btnn"><a href="#">Start</a></button>
+  </div>
+  <div class="content">
+    <div id="face">    
+        <img id ='S1' src='Male/S1.gif'/>
+        <img id= 'S2' src='Male/S2.gif'/>
+        <img id ='BH' src='Male/BH.gif'/>
+        <img id ='BH1' src='Male/BH1.gif'/>
+        <img id ='HB' src='Male/HB.gif'/>        
+        <img id= 'BHHH' src='Male/BHHH.gif'/>
+        <img id ='Wrinkle' src='Male/Wrinkle.gif'/>
+        <img id ='WrinkleB' src='Male/WrinkleB.gif'/>
+        <img id ='Before' src='Male/startingPage2.JPG'/>
+        <img id= 'Start' src='Male/Starting.gif'/>
+        <img id ='Q1' src='Male/Q1.gif'/>       
+        <img id ='Q2' src='Male/Q2.gif'/>
+        <img id ='Q3' src='Male/Q3.gif'/>
+        <img id ='Q4' src='Male/Q4.gif'/>
+        <img id ='Q5' src='Male/Q5.gif'/>
+        <img id= 'End' src='Male/Ending.gif'/>
+        <img id ='Q1S' src='Male/Q1S.gif'/>       
+        <img id ='Q2S' src='Male/Q2S.gif'/>
+        <img id ='Q3S' src='Male/Q3S.gif'/>
+        <img id ='Q4S' src='Male/Q4S.gif'/>
+        <img id ='Q5S' src='Male/Q5S.gif'/>
+        <img id ='Sorry' src='Male/Sorry.gif'/>   
+
+    </div>
+  </div>
+  
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript">
+  
+  // Create AudioContext
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  var audioContext = new AudioContext();
+
+  // Define function called by getUserMedia 
+  function startUserMedia(stream) {
+    // Create MediaStreamAudioSourceNode
+    var source = audioContext.createMediaStreamSource(stream);
+
+    // Setup options
+    var options = {
+     source: source,
+     voice_stop: function() {console.log('voice_stop');}, 
+     voice_start: function() {console.log('voice_start');}
+    };     
+    // Create VAD
+    var vad = new VAD(options);    
+  }
+  // Ask for audio device
+  navigator.getUserMedia = navigator.getUserMedia || 
+                           navigator.mozGetUserMedia || 
+                           navigator.webkitGetUserMedia;
+  navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+          console.log("No live audio input in this browser: " + e);
+  });
+</script>
+</body>
+</html>
